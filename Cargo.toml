@@ -1,0 +1,8 @@
+[package]
+name = "simple_write_logger"
+version = "0.1.0"
+authors = ["bnuts <beehive.nuts@gmail.com>"]
+license = "MIT"
+
+[dependencies]
+log = "0.3"
