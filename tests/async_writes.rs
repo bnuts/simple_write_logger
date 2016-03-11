@@ -38,8 +38,7 @@ fn async_writes() {
 
         let mut expect = String::new();
         for _ in 0..TEST_COUNT {
-            expect.push_str(
-                "async_writes:tests\\async_writes.rs:31:DEBUG:\tDEBUG\n");
+            expect.push_str("tests\\async_writes.rs:31:DEBUG:\tDEBUG\n");
         }
         let mut file_str = String::new();
         let _ = file.unwrap().read_to_string(&mut file_str);
