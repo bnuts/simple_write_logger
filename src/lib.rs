@@ -19,7 +19,10 @@ impl Log for Logger {
     fn log(&self, rec: &LogRecord) {
         let mut writers = match self.writers.lock() {
             Ok(writers) => writers,
-            Err(err) => {let _ = writeln!(stderr(), "{:?}", err); return},
+            Err(err) => {
+                let _ = writeln!(stderr(), "{:?}", err);
+                return;
+            },
         };
         let loc = rec.location();
         for i in 0..writers.len() {
