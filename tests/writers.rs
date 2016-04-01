@@ -29,7 +29,7 @@ fn writers() {
         let file = File::open(temp);
         assert!(file.is_ok());
 
-        let expect = "tests\\writers.rs:26:DEBUG:\tDEBUG\n";
+        let expect = "DEBUG:tests\\writers.rs:26:DEBUG\n";
         let mut file_str = String::new();
         let _ = file.unwrap().read_to_string(&mut file_str);
         assert_eq!(file_str, expect);
