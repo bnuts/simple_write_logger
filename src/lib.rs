@@ -28,8 +28,8 @@ impl Log for Logger {
         for i in 0..writers.len() {
             let _ = writeln!(
                 writers[i].0,
-                "{}:{}:{}:\t{}",
-                loc.file(), loc.line(), rec.level(), rec.args());
+                "{}:{}:{}:{}",
+                rec.level(), loc.file(), loc.line(), rec.args());
         }
     }
 }
