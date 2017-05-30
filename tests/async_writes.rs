@@ -24,7 +24,7 @@ fn async_writes() {
             logger::Writer(Box::new(stdout())),
             logger::Writer(Box::new(stderr())),
         ];
-        assert!(logger::init(writers).is_ok());
+        assert!(logger::init(writers, log::LogLevel::Trace).is_ok());
     }
 
     let mut threads = Vec::new();
@@ -41,7 +41,7 @@ fn async_writes() {
 
         let mut expect = String::new();
         for _ in 0..TEST_COUNT {
-            expect.push_str("DEBUG:tests\\async_writes.rs:31:DEBUG\n");
+            expect.push_str("DEBUG:tests\\async_writes.rs:32:DEBUG\n");
         }
         let mut file_str = String::new();
         let _ = file.unwrap().read_to_string(&mut file_str);

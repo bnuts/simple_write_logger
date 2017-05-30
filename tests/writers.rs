@@ -21,7 +21,7 @@ fn writers() {
             logger::Writer(Box::new(stdout())),
             logger::Writer(Box::new(stderr())),
         ];
-        assert!(logger::init(writers).is_ok());
+        assert!(logger::init(writers, log::LogLevel::Trace).is_ok());
     }
 
     debug!("DEBUG");
@@ -30,7 +30,7 @@ fn writers() {
         let file = File::open(temp);
         assert!(file.is_ok());
 
-        let expect = "DEBUG:tests\\writers.rs:26:DEBUG\n";
+        let expect = "DEBUG:tests\\writers.rs:27:DEBUG\n";
         let mut file_str = String::new();
         let _ = file.unwrap().read_to_string(&mut file_str);
         assert_eq!(file_str, expect);
