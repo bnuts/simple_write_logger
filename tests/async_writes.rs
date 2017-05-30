@@ -1,9 +1,10 @@
-#[macro_use] extern crate log;
+#[macro_use]
+extern crate log;
 extern crate simple_write_logger as logger;
 
 use std::env::temp_dir;
 use std::fs::{File, remove_file};
-use std::io::{Read, stdout, stderr};
+use std::io::{Read, stderr, stdout};
 use std::thread;
 
 const TEST_COUNT: u32 = 5;
@@ -28,9 +29,11 @@ fn async_writes() {
 
     let mut threads = Vec::new();
     for _ in 0..TEST_COUNT {
-        threads.push(thread::spawn(|| {debug!("DEBUG")}));
+        threads.push(thread::spawn(|| debug!("DEBUG")));
     }
-    for t in threads.into_iter() {let _ = t.join();}
+    for t in threads.into_iter() {
+        let _ = t.join();
+    }
 
     {
         let file = File::open(temp);

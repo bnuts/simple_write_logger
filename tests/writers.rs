@@ -1,9 +1,10 @@
-#[macro_use] extern crate log;
+#[macro_use]
+extern crate log;
 extern crate simple_write_logger as logger;
 
 use std::env::temp_dir;
 use std::fs::{File, remove_file};
-use std::io::{Read, stdout, stderr};
+use std::io::{Read, stderr, stdout};
 
 #[test]
 fn writers() {

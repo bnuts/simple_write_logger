@@ -12,9 +12,7 @@ struct Logger {
 }
 
 impl Log for Logger {
-    fn enabled(&self, _: &LogMetadata) -> bool {
-        true
-    }
+    fn enabled(&self, _: &LogMetadata) -> bool { true }
 
     fn log(&self, rec: &LogRecord) {
         let mut writers = match self.writers.lock() {
@@ -26,10 +24,12 @@ impl Log for Logger {
         };
         let loc = rec.location();
         for i in 0..writers.len() {
-            let _ = writeln!(
-                writers[i].0,
-                "{}:{}:{}:{}",
-                rec.level(), loc.file(), loc.line(), rec.args());
+            let _ = writeln!(writers[i].0,
+                             "{}:{}:{}:{}",
+                             rec.level(),
+                             loc.file(),
+                             loc.line(),
+                             rec.args());
         }
     }
 }
@@ -37,6 +37,6 @@ impl Log for Logger {
 pub fn init(writers: Vec<Writer>) -> Result<(), SetLoggerError> {
     log::set_logger(|max_level| {
         max_level.set(LogLevelFilter::max());
-        Box::new(Logger {writers: Mutex::new(writers)})
+        Box::new(Logger { writers: Mutex::new(writers) })
     })
 }
