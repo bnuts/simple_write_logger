@@ -10,7 +10,7 @@ simple logging library for rust
 log = "0.3"
 
 [dependencies.simple_write_logger]
-git = "https://github.com/bnuts/simple_write_logger.git"
+git = "https://github.com/bnuts/simple_write_logger-rs.git"
 ```
 
 ```rust
