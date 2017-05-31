@@ -2,51 +2,27 @@
 extern crate log;
 extern crate simple_write_logger as logger;
 
-use std::env::temp_dir;
-use std::fs::{File, remove_file};
-use std::io::{Read, stderr, stdout};
-use std::thread;
+mod test;
 
-const TEST_COUNT: u32 = 5;
+const TEST_COUNT: usize = 5;
 
 #[test]
 fn async_writes() {
-    let mut t = temp_dir();
-    t.push("simple_write_logger.txt");
-    let temp = t.to_str().unwrap();
+    use std::io::{stderr, stdout};
+    use std::thread;
 
-    {
-        let file = File::create(temp);
-        assert!(file.is_ok());
-
-        let writers = vec![
-            logger::Writer(Box::new(file.unwrap())),
-            logger::Writer(Box::new(stdout())),
-            logger::Writer(Box::new(stderr())),
-        ];
-        assert!(logger::init(writers, log::LogLevel::Trace).is_ok());
-    }
-
-    let mut threads = Vec::new();
-    for _ in 0..TEST_COUNT {
-        threads.push(thread::spawn(|| debug!("DEBUG")));
-    }
-    for t in threads.into_iter() {
-        let _ = t.join();
-    }
-
-    {
-        let file = File::open(temp);
-        assert!(file.is_ok());
-
-        let mut expect = String::new();
+    let writers = vec![
+        logger::Writer(Box::new(stdout())),
+        logger::Writer(Box::new(stderr())),
+    ];
+    let expect = "DEBUG:tests\\async_writes.rs:22:DEBUG\n".repeat(TEST_COUNT);
+    test::test(writers, log::LogLevel::Debug, &expect, || {
+        let mut threads = Vec::new();
         for _ in 0..TEST_COUNT {
-            expect.push_str("DEBUG:tests\\async_writes.rs:32:DEBUG\n");
+            threads.push(thread::spawn(|| debug!("DEBUG")));
         }
-        let mut file_str = String::new();
-        let _ = file.unwrap().read_to_string(&mut file_str);
-        assert_eq!(file_str, expect);
-    }
-
-    assert!(remove_file(temp).is_ok());
+        for t in threads {
+            let _ = t.join();
+        }
+    });
 }
