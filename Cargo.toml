@@ -5,4 +5,4 @@ authors = ["bnuts <beehive.nuts@gmail.com>"]
 license = "MIT"
 
 [dependencies]
-log = "0.3"
+log = { version = "0.4", features = ["std"] }

@@ -13,5 +13,5 @@ fn writers() {
         logger::Writer(Box::new(stderr())),
     ];
     let expect = "DEBUG:tests\\writers.rs:16:DEBUG\n";
-    test::test(writers, log::LogLevel::Trace, expect, || debug!("DEBUG"));
+    test::test(writers, log::Level::Trace, expect, || debug!("DEBUG"));
 }

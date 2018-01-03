@@ -16,7 +16,7 @@ fn async_writes() {
         logger::Writer(Box::new(stderr())),
     ];
     let expect = "DEBUG:tests\\async_writes.rs:22:DEBUG\n".repeat(TEST_COUNT);
-    test::test(writers, log::LogLevel::Debug, &expect, || {
+    test::test(writers, log::Level::Debug, &expect, || {
         let mut threads = Vec::new();
         for _ in 0..TEST_COUNT {
             threads.push(thread::spawn(|| debug!("DEBUG")));

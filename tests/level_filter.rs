@@ -8,5 +8,5 @@ mod test;
 fn level_filter() {
     let writers = Vec::new();
     let expect = "";
-    test::test(writers, log::LogLevel::Info, expect, || debug!("DEBUG"));
+    test::test(writers, log::Level::Info, expect, || debug!("DEBUG"));
 }

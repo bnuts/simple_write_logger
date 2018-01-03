@@ -1,8 +1,9 @@
 extern crate log;
 extern crate simple_write_logger as logger;
 
-pub fn test<F>(mut writers: Vec<logger::Writer>, level: log::LogLevel, expect: &str, f: F)
-    where F: Fn()
+pub fn test<F>(mut writers: Vec<logger::Writer>, level: log::Level, expect: &str, f: F)
+where
+    F: Fn(),
 {
     use std::env::temp_dir;
     use std::fs::{File, remove_file};
