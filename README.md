@@ -7,7 +7,7 @@ simple logging library for rust
 
 ```toml
 [dependencies]
-log = "0.3"
+log = "0.4"
 
 [dependencies.simple_write_logger]
 git = "https://github.com/bnuts/simple_write_logger.rs.git"
