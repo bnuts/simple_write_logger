@@ -5,9 +5,11 @@ pub fn test<F>(mut writers: Vec<logger::Writer>, level: log::Level, expect: &str
 where
     F: Fn(),
 {
-    use std::env::temp_dir;
-    use std::fs::{File, remove_file};
-    use std::io::Read;
+    use std::{
+        env::temp_dir,
+        fs::{remove_file, File},
+        io::Read,
+    };
 
     let mut t = temp_dir();
     t.push("simple_write_logger.txt");
@@ -16,7 +18,7 @@ where
     {
         let file = File::create(temp).unwrap();
         writers.push(logger::Writer(Box::new(file)));
-        assert!(logger::init(writers, level).is_ok());
+        assert!(logger::init(writers, level, true).is_ok());
     }
 
     f();
