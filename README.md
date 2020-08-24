@@ -27,7 +27,7 @@ fn main() {
         simple_write_logger::Writer(Box::new(stdout())),
         simple_write_logger::Writer(Box::new(file)),
     ];
-    simple_write_logger::init(writers, log::Level::Debug).unwrap();
+    simple_write_logger::init(writers, log::Level::Debug, true).unwrap();
 
     debug!("DEBUG");
 }
