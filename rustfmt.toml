@@ -1,6 +1,3 @@
-chain_one_line_max = 100
-closure_block_indent_threshold = 0
-fn_call_width = 100
-fn_single_line = true
 match_block_trailing_comma = true
-reorder_imported_names = true
+max_width = 99
+merge_imports = true
